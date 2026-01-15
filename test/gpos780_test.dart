@@ -49,11 +49,9 @@ class MockGpos780Platform
 
 void main() {
   final Gpos780Platform initialPlatform = Gpos780Platform.instance;
-  late Gpos780 gpos780Plugin;
   late MockGpos780Platform fakePlatform;
 
   setUp(() {
-    gpos780Plugin = Gpos780();
     fakePlatform = MockGpos780Platform();
     Gpos780Platform.instance = fakePlatform;
   });
@@ -67,46 +65,46 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await gpos780Plugin.getPlatformVersion(), '42');
+    expect(await Gpos780.printer.getPlatformVersion(), '42');
   });
 
-  test('initPrinter', () async {
-    expect(await gpos780Plugin.initPrinter(), 'Printer Initialized');
+  test('init printer', () async {
+    expect(await Gpos780.printer.init(), 'Printer Initialized');
   });
 
   test('printText', () async {
-    expect(await gpos780Plugin.printText(text: 'Test'), 'Text Printed');
+    expect(await Gpos780.printer.printText(text: 'Test'), 'Text Printed');
   });
 
   test('printMultipleLines', () async {
     expect(
-      await gpos780Plugin.printMultipleLines(lines: ['Line 1', 'Line 2']),
+      await Gpos780.printer.printMultipleLines(lines: ['Line 1', 'Line 2']),
       'Lines Printed',
     );
   });
 
   test('printImageFromBase64', () async {
     expect(
-      await gpos780Plugin.printImageFromBase64(base64: 'base64string'),
+      await Gpos780.printer.printImageFromBase64(base64: 'base64string'),
       'Image Printed',
     );
   });
 
   test('printImageFromBytes', () async {
     expect(
-      await gpos780Plugin.printImageFromBytes(bytes: Uint8List(0)),
+      await Gpos780.printer.printImageFromBytes(bytes: Uint8List(0)),
       'Image Printed',
     );
   });
 
   test('printHtml', () async {
     expect(
-      await gpos780Plugin.printHtml(html: '<html></html>'),
+      await Gpos780.printer.printHtml(html: '<html></html>'),
       'HTML Printed',
     );
   });
 
   test('scrollPaper', () async {
-    expect(await gpos780Plugin.scrollPaper(lines: 50), 'Paper Scrolled');
+    expect(await Gpos780.printer.scrollPaper(lines: 50), 'Paper Scrolled');
   });
 }

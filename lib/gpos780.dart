@@ -3,11 +3,22 @@ import 'dart:typed_data';
 import 'gpos780_platform_interface.dart';
 
 class Gpos780 {
+  // Construtor privado para prevenir instanciação
+  Gpos780._();
+
+  /// Acesso aos métodos da impressora
+  static final printer = _Printer();
+  
+  // Futuramente você pode adicionar:
+  // static final nfc = _Nfc();
+}
+
+class _Printer {
   Future<String?> getPlatformVersion() {
     return Gpos780Platform.instance.getPlatformVersion();
   }
 
-  Future<String?> initPrinter() {
+  Future<String?> init() {
     return Gpos780Platform.instance.initPrinter();
   }
 

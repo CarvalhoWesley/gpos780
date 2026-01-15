@@ -3,7 +3,6 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:gpos780/gpos780.dart';
-import 'dart:typed_data';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +17,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  final _gpos780Plugin = Gpos780();
 
   @override
   void initState() {
@@ -33,7 +31,7 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       platformVersion =
-          await _gpos780Plugin.getPlatformVersion() ??
+          await Gpos780.printer.getPlatformVersion() ??
           'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
@@ -61,19 +59,19 @@ class _MyAppState extends State<MyApp> {
               Text('Running on: $_platformVersion\n'),
               ElevatedButton(
                 onPressed: () async {
-                  await _gpos780Plugin.initPrinter();
+                  await Gpos780.printer.init();
                 },
                 child: const Text('Init Printer'),
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await _gpos780Plugin.printText(text: 'Hello World');
+                  await Gpos780.printer.printText(text: 'Hello World');
                 },
                 child: const Text('Print Text'),
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await _gpos780Plugin.printMultipleLines(
+                  await Gpos780.printer.printMultipleLines(
                     lines: ['Line 1', 'Line 2', 'Line 3'],
                   );
                 },
@@ -82,26 +80,28 @@ class _MyAppState extends State<MyApp> {
               ElevatedButton(
                 onPressed: () async {
                   // Replace with a valid base64 image
-                  await _gpos780Plugin.printImageFromBase64(base64: '');
+                  await Gpos780.printer.printImageFromBase64(base64: '');
                 },
                 child: const Text('Print Image from Base64'),
               ),
               ElevatedButton(
                 onPressed: () async {
                   // Replace with valid image bytes
-                  await _gpos780Plugin.printImageFromBytes(bytes: Uint8List(0));
+                  await Gpos780.printer.printImageFromBytes(
+                    bytes: Uint8List(0),
+                  );
                 },
                 child: const Text('Print Image from Bytes'),
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await _gpos780Plugin.printHtml(html: '<h1>Hello World</h1>');
+                  await Gpos780.printer.printHtml(html: '<h1>Hello World</h1>');
                 },
                 child: const Text('Print HTML'),
               ),
               ElevatedButton(
                 onPressed: () async {
-                  await _gpos780Plugin.scrollPaper(lines: 100);
+                  await Gpos780.printer.scrollPaper(lines: 100);
                 },
                 child: const Text('Scroll Paper'),
               ),

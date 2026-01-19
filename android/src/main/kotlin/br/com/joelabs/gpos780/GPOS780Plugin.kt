@@ -2,7 +2,6 @@ package br.com.joelabs.gpos780
 
 import android.content.Context
 import android.util.Log
-import br.com.gertec.gedi.GEDI
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -23,7 +22,6 @@ class GPOS780Plugin: FlutterPlugin, MethodCallHandler {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "gpos780")
         channel.setMethodCallHandler(this)
         context = flutterPluginBinding.applicationContext
-        GEDI.init(context)
     }
 
     override fun onMethodCall(call: MethodCall, result: Result) {

@@ -69,7 +69,6 @@ android {
 }
 
 dependencies {
-    debugApi(name: "gpos780-2.1.4-debug", ext: "aar")
-    releaseApi(name: "gpos780-2.1.4-release", ext: "aar")
-    api(name: "libgedi-1.16.19-gpos780-payment-release", ext: "aar")
+    debugImplementation(name: "gpos780-2.1.4-debug", ext: "aar")
+    releaseImplementation(name: "gpos780-2.1.4-release", ext: "aar")
 }

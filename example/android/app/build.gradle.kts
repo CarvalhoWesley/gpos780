@@ -47,3 +47,7 @@ flutter {
     source = "../.."
 }
 
+dependencies {
+    implementation(files("libs/libgedi-1.16.19-gpos780-payment-release.aar"))
+}
+
